@@ -1,3 +1,6 @@
+# NOTA: Este es un conjunto de ejercicios para mejorar la lógica de programación y masterizar el uso de python. Se ha intentado usar lo máximo posible programación 
+# declarativa, lo pidiera o no el enunciado.
+
 # 1. Escribe una función que reciba una cadena de texto como parámetro y devuelva un diccionario con las frecuencias de cada letra en la cadena. 
 # Los espacios no deben ser considerados.
 
@@ -90,4 +93,85 @@ def division():
         print("No puedes dividir entre 0")
 
 division() # Introduce un número: 5 // Introduce otro número: 0 // No puedes dividir entre 0
+
+# 9. Escribe una función que tome una lista de nombres de mascotas como parámetro y devuelva una nueva lista excluyendo ciertas mascotas prohibidas en España. 
+# La lista de mascotas a excluir es ["Mapache", "Tigre", "Serpiente Pitón", "Cocodrilo", "Oso"].Usa la función filter()
+
+def mascotas_legales(mascotas):
+    prohibidas = ["Mapache", "Tigre", "Serpiente Pitón", "Cocodrilo", "Oso"]
+    list.filter(lambda m: m not in prohibidas, mascotas)
+
+    return mascotas
+
+mascotas_legales(["Perro", "Gato", "Mapache", "Tigre", "Serpiente Pitón", "Cocodrilo", "Oso"]) # ['Perro', 'Gato']
+
+# 10. Escribe una función que reciba una lista de números y calcule su promedio. Si la lista está vacía, lanza una excepción personalizada y maneja el error adecuadamente.
+
+class EmptyList(Exception):
+    pass
+
+def promedio(numeros):
+    try:
+        if len(numeros) == 0:
+            raise EmptyList("La lista proporcionada está vacía")
+        return sum(numeros) / len(numeros)
+    except EmptyList as e:
+        return str(e)
+
+promedio([]) # 'La lista proporcionada está vacía'
+
+# 11. Escribe un programa que pida al usuario que introduzca su edad. Si el usuario ingresa un valor no numérico o un valor fuera del rango esperado 
+# (por ejemplo, menor que 0 o mayor que 120), maneja las excepciones adecuadamente.
+
+def input_edad():
+    try:
+        edad = int(input("Introduce tu edad: "))
+        
+        if edad < 0 or edad > 120:
+            raise ValueError("La edad debe estar entre 0 y 120.")
+        
+        print(f"Tu edad es {edad}.")
+    
+    except ValueError as e:
+        print(f"Error: {e}")
+
+input_edad()  # Introduce un número: hola // Error: invalid literal for int() with base 10: 'hola'
+
+# 12. Genera una función que al recibir una frase devuelva una lista con la longitud de cada palabra. Usa la función map()
+
+def longitud_palabras(frase):
+    return list(map(lambda x: len(x), frase.split()))
+
+longitud_palabras("tengo 369 cafés") # [5, 3, 5]
+
+
+# 13. Genera una función la cual, para un conjunto de caracteres, devuelva una lista de tuplas con cada letra en mayúsculas y minúsculas. Las letras no pueden estar repetidas 
+# .Usa la función map()
+
+def lista_tuplas(caracteres):
+    return list(map(lambda c: (c.upper(), c.lower()), set(caracteres)))
+
+lista_tuplas("python") # [('Y', 'y'), ('O', 'o'), ('T', 't'), ('H', 'h'), ('N', 'n'), ('P', 'p')]
+
+# 14. Crea una función que retorne las palabras de una lista de palabras que comience con una letra en especifico. Usa la función filter()
+
+def palabras_que_empiezan_por_letra(palabras, inicial):
+    return list(filter(lambda p: p.startswith(inicial), palabras))
+
+palabras_que_empiezan_por_letra(["hola", "mundo", "python", "programacion"], "p") # ['python', 'programacion']
+
+# 15. Crea una función lambda que  sume 3 a cada número de una lista dada.
+
+def sumar_3(numeros):
+    return list(map(lambda x: x + 3, numeros))
+
+sumar_3([2, 5, 7]) # [5, 8, 10]
+
+# 16. Escribe una función que tome una cadena de texto y un número entero n como parámetros y devuelva una lista de todas las palabras que sean más largas que n. 
+# Usa la función filter()
+
+def palabras_mas_largas_que_n(texto, n):
+    return list(filter(lambda p: len(p) > n, texto.split()))
+
+palabras_mas_largas_que_n("hola soy Marcos Palomero y soy programador", 3) # ['hola', 'Marcos', 'Palomero', 'programador']
 
